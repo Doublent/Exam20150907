@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- <constant name="struts.configuration.xml.reload" value="true"></constant> -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="do" />
+
+	<package name="filmlogin" extends="struts-default">
+		<interceptors>
+			<interceptor name="checkLogin"
+				class="com.hand.interceptor.CheckLoginInterceptor"></interceptor>
+			<interceptor-stack name="defaultInterceptorss">
+				<interceptor-ref name="checkLogin"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<action name="login" class="com.hand.action.LoginAction"
+			method="execute">
+			<result name="success">/index.jsp</result>
+			<result name="error">/Login.jsp</result>
+		</action>
+		<action name="add" class="com.hand.action.AddAction" method="execute">
+			<interceptor-ref name="defaultInterceptorss"></interceptor-ref>
+			<result name="success">/Add.jsp</result>
+			<result name="error">/Login.jsp</result>
+		</action>
+	</package>
+
+</struts>    
